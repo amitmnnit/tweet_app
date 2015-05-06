@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+    <form method="post" action=".">{% csrf_token %}
+        
+        <div class="panel panel-default">
+		  <div class="panel-heading" align="center">Have a Tweet</div>
+		  <div class="panel-body" align="center">
+		    <table border="0">
+        	    {{ form.as_table }}
+        	</table>
+        	<div align="center">
+        		</br><input type="submit" value="Tweet" />
+        	</div>
+		  </div>
+		</div>
+
+    </form>
+
+{% endblock %}

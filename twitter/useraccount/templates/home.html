@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Welcome to MyTwitter{% endblock %}
+{% block content %}
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    {% if mytweets %}
+        <h2 align="center">My Tweet</h2>
+        {% if tweets %}
+          <ul>
+          {% for tweet in tweets %}
+              <li><font color="blue">{{ tweet.tweet }}</font> - {{tweet.tweeted_at}}</li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          <h3 align="center">You have not tweeted yet. Please tweet.</h3>
+        {% endif %}
+    {% else %}
+      <h2 align="center">Users Tweet</h2>
+        {% if tweets %}
+        <ul class="tweet">
+            {% for tweet in tweets %}
+              <li>
+                <font size="4" color="orange">{{ tweet.user }}</font></br><font color="blue">{{ tweet.tweet }}</font> - {{tweet.tweeted_at}}
+              </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+          <h3 align="center">You have not followed any user. Please follow.</h3>
+        {% endif %}
+    {% endif %}
+
+
+<script>
+$( document ).ready(function() {
+
+  var source = new EventSource("{% url 'sse' channel_extension %}");
+  function log() {
+    console.log(arguments);
+  }
+
+  source.onopen = function() {
+    console.log(arguments);
+  };
+
+  source.onerror = function () {
+    console.log(arguments);
+  };
+
+  source.addEventListener('connections', log, false);
+  source.addEventListener('requests', log, false);
+  source.addEventListener('myevent', function(e) {
+    tweets = JSON.parse(e.data);
+    console.log(tweets);
+
+    var tr;
+    for (var i = 0; i < tweets.length; i++) {
+        tr = $('<li/>');
+        tr.append('<li><font size="4" color="orange">' + tweets[i].username + "</font></br>");
+        tr.append('<font color="blue">' + tweets[i].tweet + "</font> - ");
+        tr.append(tweets[i].date + "</li>");
+        $('.tweet').prepend(tr);
+    }
+
+  }, false);
+  source.addEventListener('uptime', log, false);
+
+  source.onmessage = function() {
+    console.log('success')
+    console.log(arguments);
+  };
+});
+
+</script>
+
+{% endblock %}
