@@ -20,7 +20,7 @@ django-grip==1.6.1
 django-sse==0.4.1
 django-sse-wrapper==0.0.3
 django-websocket-redis==0.4.4
-ecdsa==0.13
+ecdsa==0.13.3
 elasticsearch==1.4.0
 eventlet==0.17.3
 futures==2.2.0
