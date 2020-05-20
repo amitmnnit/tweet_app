@@ -30,7 +30,7 @@ google-api-python-client==1.2
 greenlet==0.4.5
 gripcontrol==2.3.2
 gunicorn==19.3.0
-httplib2==0.9
+httplib2==0.18.0
 jsonfield==1.0.3
 kombu==3.0.24
 paramiko==1.15.2
