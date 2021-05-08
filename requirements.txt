@@ -22,7 +22,7 @@ django-sse-wrapper==0.0.3
 django-websocket-redis==0.4.4
 ecdsa==0.13
 elasticsearch==1.4.0
-eventlet==0.17.3
+eventlet==0.31.0
 futures==2.2.0
 gevent==1.0.1
 gevent-websocket==0.9.3
