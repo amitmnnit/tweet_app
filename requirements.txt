@@ -33,7 +33,7 @@ gunicorn==19.3.0
 httplib2==0.9
 jsonfield==1.0.3
 kombu==3.0.24
-paramiko==1.15.2
+paramiko==2.10.1
 pubcontrol==2.1.1
 pycrypto==2.6.1
 pyelasticsearch==1.2.1
